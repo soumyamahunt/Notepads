@@ -1,61 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
-<Package
-  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
-  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
-  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
-  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
-  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
-  xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
-  xmlns:iot2="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"
-  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="mp uap uap3 uap5 uap10 desktop desktop4 iot2 rescap">
-
-  <Identity
-    Name="Notepads"
-    Publisher="CN=jackil"
-    Version="1.4.2.0" />
-
-  <mp:PhoneIdentity PhoneProductId="dde28e6c-0f89-4885-83bc-51d9580080a1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+         xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+         xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+         xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+         xmlns:iot2="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"
+         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+         IgnorableNamespaces="mp uap uap5 uap10 desktop desktop4 iot2 rescap">
+  
+  <Identity Name="Notepads" Publisher="CN=jackil" Version="1.4.2.0" />
+  <mp:PhoneIdentity PhoneProductId="dde28e6c-0f89-4885-83bc-51d9580080a1" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 
   <Properties>
     <DisplayName>Notepads App</DisplayName>
     <PublisherDisplayName>Jackie Liu</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
+  
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
-
+  
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
+  
   <Applications>
     <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="$targetentrypoint$"
-      desktop4:SupportsMultipleInstances="true"
-      iot2:SupportsMultipleInstances="true">
-      <uap:VisualElements
-        DisplayName="Notepads"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="A modern, lightweight text editor with a minimalist design."
-        BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="Notepads">
+                 Executable="$targetnametoken$.exe"
+                 EntryPoint="Notepads.App"
+                 desktop4:SupportsMultipleInstances="true"
+                 iot2:SupportsMultipleInstances="true">
+      <uap:VisualElements DisplayName="Notepads"
+                          Square150x150Logo="Assets\Square150x150Logo.png"
+                          Square44x44Logo="Assets\Square44x44Logo.png"
+                          Description="A modern, lightweight text editor with a minimalist design."
+                          BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"
+                         Square71x71Logo="Assets\SmallTile.png"
+                         Square310x310Logo="Assets\LargeTile.png"
+                         ShortName="Notepads">
           <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo"/>
-            <uap:ShowOn Tile="wide310x150Logo"/>
-            <uap:ShowOn Tile="square310x310Logo"/>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
           </uap:ShowNameOnTiles>
-        </uap:DefaultTile >
-        <uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true" BackgroundColor="#2f2f2f"/>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true" BackgroundColor="#2f2f2f" />
       </uap:VisualElements>
+      
       <Extensions>
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="notepads">
@@ -63,10 +60,7 @@
             <uap:DisplayName>Notepads URI Scheme</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
-        <uap5:Extension
-          Category="windows.appExecutionAlias"
-          Executable="Notepads.exe"
-          EntryPoint="Notepads.App">
+        <uap5:Extension Category="windows.appExecutionAlias" Executable="Notepads.exe" EntryPoint="Notepads.App">
           <uap5:AppExecutionAlias>
             <uap5:ExecutionAlias Alias="Notepads.exe" />
           </uap5:AppExecutionAlias>
@@ -78,7 +72,7 @@
               <uap:FileType ContentType="text/plain">.txt</uap:FileType>
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/TextFileDisplayName</uap:DisplayName>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
             <uap:Logo>Assets\FileIcons\txt.png</uap:Logo>
           </uap:FileTypeAssociation>
         </uap:Extension>
@@ -94,7 +88,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ConfigFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\cfg.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -104,7 +98,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/InitializationFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\ini.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -121,7 +115,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/MarkdownFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\md.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -131,7 +125,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/LogFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\log.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -141,7 +135,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BibTeXFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\bib.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -161,7 +155,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/JsonFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\json.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -172,7 +166,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/YamlFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\yml.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -189,7 +183,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/XmlFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\xml.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -205,7 +199,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/HtmlFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\html.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -216,7 +210,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/AspFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\asp.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -227,7 +221,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/JspFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\jsp.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -238,7 +232,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CssFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\css.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -248,7 +242,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ShellScriptFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\sh.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -260,7 +254,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/RunCommandsFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\rc.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -270,7 +264,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BashScriptFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\bash.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -285,7 +279,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/JavascriptFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\js.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -296,7 +290,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/TypeScriptFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -306,7 +300,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/LuaFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -318,7 +312,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\c.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -333,7 +327,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CppFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\cpp.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -346,7 +340,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/HeaderFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\h.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -356,7 +350,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CmakeFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -368,7 +362,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CSharpFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\cs.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -382,7 +376,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PhpFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\php.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -392,7 +386,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PythonFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\py.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -409,7 +403,7 @@
               <uap:FileType>.arb</uap:FileType>
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/RubyFileDisplayName</uap:DisplayName>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
             <uap:Logo>Assets\FileIcons\rb.png</uap:Logo>
           </uap:FileTypeAssociation>
         </uap:Extension>
@@ -421,7 +415,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/JavaFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\java.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -434,7 +428,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/VisualBasicFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\vb.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -444,7 +438,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/GoFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -454,7 +448,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/SubtitleFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\srt.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -464,7 +458,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/AegisubAdvancedSubtitleFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\ass.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -474,7 +468,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/SubStationAlphaSubtitleFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\ssa.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -484,7 +478,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/VueFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\vue.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -494,7 +488,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/VueConfigFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\vue.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -504,7 +498,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/GitConfigFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -514,7 +508,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/GitIgnoreFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -524,7 +518,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/GitAttributesFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -535,7 +529,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ProjectFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -545,7 +539,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/NpmConfigFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -555,7 +549,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BashHistoryFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -565,7 +559,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BashAliasesFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -575,7 +569,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BashProfileFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -585,7 +579,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BashLoginFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -595,7 +589,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BashLogoutFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -605,7 +599,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CgiFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -617,7 +611,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PerlFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\perl.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -627,7 +621,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BuildPathFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -638,7 +632,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/SqlFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\sql.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -648,7 +642,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/NfoFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -658,7 +652,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/AutoHotkeyScriptFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -668,7 +662,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ZshellConfigFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -678,7 +672,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ZshellHistoryFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -688,7 +682,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/LrcFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -698,7 +692,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/VerilogFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -708,7 +702,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/DatFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -718,7 +712,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/GlspFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -728,7 +722,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/AsmFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -743,7 +737,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ClojureFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -755,7 +749,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CoffeeScriptFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -765,7 +759,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/DockerFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -778,7 +772,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/FSharpFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -790,7 +784,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/DiffFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -802,7 +796,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/GroovyFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -814,7 +808,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/HandlebarsFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -831,7 +825,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/HlslFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -841,7 +835,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/MapFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -851,7 +845,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/LessFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -861,7 +855,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/TFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -872,7 +866,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PodFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -885,7 +879,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/Perl6FileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\perl.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -895,7 +889,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/RazorFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -905,7 +899,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/RustFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -915,7 +909,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ShaderFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -926,7 +920,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PugFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -939,7 +933,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/RFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -949,7 +943,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/InstallFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -959,7 +953,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ProfileFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -969,7 +963,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/EBuildFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -979,7 +973,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/SwiftFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -993,7 +987,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PowerShellFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1003,7 +997,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/XamlFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1013,7 +1007,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/UserFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1023,7 +1017,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/BondFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1033,7 +1027,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/HypertextAccessFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1043,7 +1037,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CommaSeparatedValuesFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1054,7 +1048,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/M3uFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1064,7 +1058,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/GlslFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1074,7 +1068,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CheatFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1084,7 +1078,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/OptFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1094,7 +1088,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/EnvironmentFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1104,7 +1098,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/TomlFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1114,7 +1108,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PvdFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1124,7 +1118,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/XslFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1134,7 +1128,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/LicenseFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1144,7 +1138,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/CSharpeProjectFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1154,7 +1148,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/ResourceFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1164,7 +1158,7 @@
             </uap:SupportedFileTypes>
             <uap:DisplayName>ms-resource:Manifest/PropertyListFileDisplayName</uap:DisplayName>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
@@ -1175,7 +1169,7 @@
               <uap10:FileType>*</uap10:FileType>
             </uap:SupportedFileTypes>
             <uap:Logo>Assets\FileIcons\file.png</uap:Logo>
-            <uap:EditFlags OpenIsSafe="true"/>
+            <uap:EditFlags OpenIsSafe="true" />
           </uap:FileTypeAssociation>
         </uap:Extension>
       </Extensions>
@@ -1199,7 +1193,7 @@
       </uap:VisualElements>
     </Application>-->
   </Applications>
-
+  
   <Capabilities>
     <Capability Name="internetClient" />
     <Capability Name="codeGeneration"/>
