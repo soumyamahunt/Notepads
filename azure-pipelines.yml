@@ -26,6 +26,7 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/t:build;_GenerateAppxPackage
                   /p:AppxBundlePlatforms="$(buildPlatform)"
+                  /p:AllowUnsafeBlocks=true
                   /p:AppxPackageDir="$(appxPackageDir)"
                   /p:AppxBundle=Always
                   /p:UapAppxPackageBuildMode=StoreUpload

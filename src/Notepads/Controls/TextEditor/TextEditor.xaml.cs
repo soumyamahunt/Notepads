@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -54,6 +56,7 @@
         public event EventHandler FileSaved;
         public event EventHandler FileReloaded;
         public event EventHandler FileRenamed;
+        public event EventHandler FileAttributeChanged;
 
         public Guid Id { get; set; }
 
@@ -72,6 +75,33 @@
         public string EditingFileName { get; private set; }
 
         public string EditingFilePath { get; private set; }
+
+        private Win32FileSystemUtility.File_Attributes _fileAttributes;
+
+        public bool IsReadOnly
+        {
+            get => _fileAttributes.HasFlag(Win32FileSystemUtility.File_Attributes.Readonly);
+            set
+            {
+                if (EditingFile == null) return;
+
+                if (value)
+                {
+                    _fileAttributes |= Win32FileSystemUtility.File_Attributes.Readonly;
+                }
+                else
+                {
+                    _fileAttributes &= ~Win32FileSystemUtility.File_Attributes.Readonly;
+                }
+
+                if (!Win32FileSystemUtility.SetFileAttributesFromApp(EditingFilePath, (uint)_fileAttributes))
+                {
+                    NotificationCenter.Instance.PostNotification(Marshal.GetExceptionForHR(Marshal.GetHRForLastWin32Error()).Message, 1500);
+                }
+                
+                UpdateAttributesInfo();
+            }
+        }
 
         private StorageFile _editingFile;
 
@@ -100,6 +130,8 @@
                 FileType = FileTypeUtility.GetFileTypeByFileName(EditingFile.Name);
             }
 
+            UpdateAttributesInfo();
+
             // Hide content preview if current file type is not supported for previewing
             if (!FileTypeUtility.IsPreviewSupported(FileType))
             {
@@ -108,6 +140,30 @@
                     ShowHideContentPreview();
                 }
             }
+        }
+
+        private void UpdateAttributesInfo()
+        {
+            if (EditingFile != null)
+            {
+                unsafe
+                {
+                    var buff = new byte[4096];
+                    fixed (byte* fileInformationBuff = buff)
+                    {
+                        ref var fileInformation = ref Unsafe.As<byte, Win32FileSystemUtility.WIN32_FILE_ATTRIBUTE_DATA>(ref buff[0]);
+
+                        if (Win32FileSystemUtility.GetFileAttributesExFromApp(EditingFilePath,
+                            Win32FileSystemUtility.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
+                            fileInformationBuff))
+                        {
+                            _fileAttributes = (Win32FileSystemUtility.File_Attributes)fileInformation.dwFileAttributes;
+                        }
+                    }
+                }
+            }
+
+            FileAttributeChanged?.Invoke(this, null);
         }
 
         private bool _isModified;
@@ -376,6 +432,8 @@
         private void TextEditor_Loaded(object sender, RoutedEventArgs e)
         {
             Loaded?.Invoke(this, e);
+
+            UpdateAttributesInfo();
 
             StartCheckingFileStatusPeriodically();
 
