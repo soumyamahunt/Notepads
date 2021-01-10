@@ -3,10 +3,11 @@
     internal static class SettingsKey
     {
         // App related
-        internal const string AppVersionStr = "AppVersionStr";
-        internal const string IsJumpListOutOfDateBool = "IsJumpListOutOfDateBool";
-        internal const string ActiveInstanceIdStr = "ActiveInstanceIdStr";
-        internal const string AlwaysOpenNewWindowBool = "AlwaysOpenNewWindowBool";
+        internal static string AppVersionStr = "AppVersionStr";
+        internal static string IsJumpListOutOfDateBool = "IsJumpListOutOfDateBool";
+        internal static string ActiveInstanceIdStr = "ActiveInstanceIdStr";
+        internal static string ExitingLastTabClosesWindowBool = "ExitingLastTabClosesWindowBool";
+        internal static string AlwaysOpenNewWindowBool = "AlwaysOpenNewWindowBool";
 
         // Theme related
         internal const string RequestedThemeStr = "RequestedThemeStr";

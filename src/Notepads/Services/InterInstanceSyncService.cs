@@ -37,6 +37,7 @@
             { SettingsKey.EditorDefaultSearchEngineStr, AppSettingsService.InitializeSearchEngineSettings },
             { SettingsKey.EditorEnableSmartCopyBool, AppSettingsService.InitializeSmartCopySettings },
             { SettingsKey.AlwaysOpenNewWindowBool, AppSettingsService.InitializeAppOpeningPreferencesSettings },
+            { SettingsKey.ExitingLastTabClosesWindowBool, AppSettingsService.InitializeAppClosingPreferencesSettings },
             { SettingsKey.LaunchElevetedProcessFailedStr, DesktopExtensionService.OnElevetedProcessLaunchRequested },
             { SettingsKey.LaunchElevetedProcessSuccessStr, DesktopExtensionService.OnElevetedProcessLaunchRequested },
             { RecentFilesListKey, async (permission) => await _notepadsMainPage.BuildOpenRecentButtonSubItems(!permission) }
