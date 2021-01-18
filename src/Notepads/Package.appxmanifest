@@ -65,7 +65,12 @@
             <uap5:ExecutionAlias Alias="Notepads.exe" />
           </uap5:AppExecutionAlias>
         </uap5:Extension>
-        <desktop:Extension Category="windows.fullTrustProcess" Executable="Notepads32.exe" />
+        <desktop:Extension Category="windows.fullTrustProcess" Executable="Notepads32.exe">
+          <desktop:FullTrustProcess>
+            <desktop:ParameterGroup GroupId="Launch" Parameters="/user" />
+            <desktop:ParameterGroup GroupId="Elevate" Parameters="/admin" />
+          </desktop:FullTrustProcess>
+        </desktop:Extension>
         <uap:Extension Category="windows.fileTypeAssociation">
           <uap:FileTypeAssociation Name="text">
             <uap:SupportedFileTypes>
@@ -1174,24 +1179,6 @@
         </uap:Extension>
       </Extensions>
     </Application>
-    <!--<Application Id="Extension" EntryPoint="Windows.FullTrustApplication" Executable="Notepads32.exe">
-      <uap:VisualElements
-        DisplayName="Notepads32"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Extension to assist Notepads modifying system files."
-        BackgroundColor="transparent" 
-        AppListEntry="none">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png" ShortName="Notepads">
-          <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo"/>
-            <uap:ShowOn Tile="wide310x150Logo"/>
-            <uap:ShowOn Tile="square310x310Logo"/>
-          </uap:ShowNameOnTiles>
-        </uap:DefaultTile >
-        <uap:SplashScreen Image="Assets\SplashScreen.png" uap5:Optional="true" BackgroundColor="#2f2f2f"/>
-      </uap:VisualElements>
-    </Application>-->
   </Applications>
   
   <Capabilities>

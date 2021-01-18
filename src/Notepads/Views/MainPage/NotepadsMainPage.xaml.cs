@@ -353,7 +353,7 @@
                 // Save session before app exit
                 await SessionManager.SaveSessionAsync(() => { SessionManager.IsBackupEnabled = false; });
                 App.InstanceHandlerMutex?.Dispose();
-                DesktopExtensionService.ExtensionLifetimeObject?.Dispose();
+                DesktopExtensionService.Dispose();
                 deferral.Complete();
                 return;
             }
@@ -361,7 +361,7 @@
             if (!NotepadsCore.HaveUnsavedTextEditor())
             {
                 App.InstanceHandlerMutex?.Dispose();
-                DesktopExtensionService.ExtensionLifetimeObject?.Dispose();
+                DesktopExtensionService.Dispose();
                 deferral.Complete();
                 return;
             }
@@ -391,7 +391,7 @@
                     else
                     {
                         App.InstanceHandlerMutex?.Dispose();
-                        DesktopExtensionService.ExtensionLifetimeObject?.Dispose();
+                        DesktopExtensionService.Dispose();
                     }
 
                     deferral.Complete();
@@ -399,7 +399,7 @@
                 discardAndExitAction: () =>
                 {
                     App.InstanceHandlerMutex?.Dispose();
-                    DesktopExtensionService.ExtensionLifetimeObject?.Dispose();
+                    DesktopExtensionService.Dispose();
                     deferral.Complete();
                 },
                 cancelAction: () =>
