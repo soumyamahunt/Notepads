@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AppCenter.Analytics;
+    using Microsoft.Win32.SafeHandles;
     using Notepads.Commands;
     using Notepads.Controls.FindAndReplace;
     using Notepads.Controls.GoTo;
@@ -76,31 +78,35 @@
 
         public string EditingFilePath { get; private set; }
 
-        private Win32FileSystemUtility.File_Attributes _fileAttributes;
+        private System.IO.FileAttributes _fileAttributes;
 
         public bool IsReadOnly
         {
-            get => _fileAttributes.HasFlag(Win32FileSystemUtility.File_Attributes.Readonly);
+            get => _fileAttributes.HasFlag(System.IO.FileAttributes.ReadOnly);
             set
             {
                 if (EditingFile == null) return;
 
                 if (value)
                 {
-                    _fileAttributes |= Win32FileSystemUtility.File_Attributes.Readonly;
+                    _fileAttributes |= System.IO.FileAttributes.ReadOnly;
                 }
                 else
                 {
-                    _fileAttributes &= ~Win32FileSystemUtility.File_Attributes.Readonly;
+                    _fileAttributes &= ~System.IO.FileAttributes.ReadOnly;
                 }
 
-                if (!Win32FileSystemUtility.SetFileAttributesFromApp(EditingFilePath, (uint)_fileAttributes))
+                var message = EditingFile.SetFileAttributes(_fileAttributes);
+
+                if (string.IsNullOrEmpty(message))
                 {
-                    NotificationCenter.Instance.PostNotification(Marshal.GetExceptionForHR(Marshal.GetHRForLastWin32Error()).Message, 1500);
+                    FileAttributeChanged?.Invoke(this, null);
+                    CheckAndUpdateAttributesInfo();
                 }
-
-                FileAttributeChanged?.Invoke(this, null);
-                CheckAndUpdateAttributesInfo();
+                else
+                {
+                    NotificationCenter.Instance.PostNotification(message, 1500);
+                }
             }
         }
 
@@ -145,29 +151,16 @@
 
         private void CheckAndUpdateAttributesInfo()
         {
-            if (EditingFile != null)
+            if (EditingFile != null  && FileModificationState != FileModificationState.RenamedMovedOrDeleted)
             {
-                unsafe
+                var fileAttributes = EditingFile.GetFileAttributes();
+                if (_fileAttributes != fileAttributes)
                 {
-                    var buff = new byte[4096];
-                    fixed (byte* fileInformationBuff = buff)
+                    _fileAttributes = fileAttributes;
+                    Dispatcher.CallOnUIThreadAsync(() =>
                     {
-                        ref var fileInformation = ref Unsafe.As<byte, Win32FileSystemUtility.WIN32_FILE_ATTRIBUTE_DATA>(ref buff[0]);
-
-                        if (Win32FileSystemUtility.GetFileAttributesExFromApp(EditingFilePath,
-                            Win32FileSystemUtility.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
-                            fileInformationBuff))
-                        {
-                            if ((uint)_fileAttributes != fileInformation.dwFileAttributes)
-                            {
-                                _fileAttributes = (Win32FileSystemUtility.File_Attributes)fileInformation.dwFileAttributes;
-                                Dispatcher.CallOnUIThreadAsync(() =>
-                                {
-                                    FileAttributeChanged?.Invoke(this, null);
-                                }).Wait(0);
-                            }
-                        }
-                    }
+                        FileAttributeChanged?.Invoke(this, null);
+                    }).Wait(0);
                 }
             }
         }
@@ -469,8 +462,8 @@
                     {
                         await Task.Delay(TimeSpan.FromSeconds(_fileStatusCheckerDelayInSec), cancellationToken);
                         LoggingService.LogInfo($"[{nameof(TextEditor)}] Checking file status for \"{EditingFile.Path}\".", consoleOnly: true);
-                        CheckAndUpdateAttributesInfo();
                         await CheckAndUpdateFileStatus(cancellationToken);
+                        CheckAndUpdateAttributesInfo();
                         await Task.Delay(TimeSpan.FromSeconds(_fileStatusCheckerPollingRateInSec), cancellationToken);
                     }
                 }, cancellationToken);
