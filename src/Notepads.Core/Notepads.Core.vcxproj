@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project InitialTargets="EnsureVcpkgBuild" DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210312.4\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210312.4\build\native\Microsoft.Windows.CppWinRT.props')" />
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{0a3b698e-6add-4c9e-9741-08f8ae576b2e}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Notepads.DesktopExtension</RootNamespace>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <ProjectGuid>{022dc661-4fa2-4264-a869-5a560fb4cc92}</ProjectGuid>
+    <ProjectName>Notepads.Core</ProjectName>
+    <RootNamespace>Notepads.Core</RootNamespace>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <IntDir>$(BaseIntermediateOutputPath)$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
-    <TargetName>Notepads32</TargetName>
     <CppWinRTOptimized>true</CppWinRTOptimized>
     <CppWinRTRootNamespaceAutoMerge>true</CppWinRTRootNamespaceAutoMerge>
     <CppWinRTGenerateWindowsMetadata>true</CppWinRTGenerateWindowsMetadata>
+    <CppWinRTUsePrefixes>false</CppWinRTUsePrefixes>
     <MinimalCoreWin>true</MinimalCoreWin>
     <GeneratedFilesDir>$(BaseIntermediateOutputPath)Generated Files\</GeneratedFilesDir>
-    <WindowsTargetPlatformVersion Condition=" '$(WindowsTargetPlatformVersion)' == '' ">10.0.19041.0</WindowsTargetPlatformVersion>
-    <WindowsTargetPlatformMinVersion>10.0.17763.0</WindowsTargetPlatformMinVersion>
-    <WindowsSDKDesktopARM64Support>true</WindowsSDKDesktopARM64Support>
-    <AppContainerApplication>false</AppContainerApplication>
-    <AppxPackage>false</AppxPackage>
+    <AppContainerApplication>true</AppContainerApplication>
     <ApplicationType>Windows Store</ApplicationType>
     <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion Condition=" '$(WindowsTargetPlatformVersion)' == '' ">10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.17134.0</WindowsTargetPlatformMinVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
@@ -74,20 +72,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)'=='Production'">
-    <ClCompile>
-      <PreprocessorDefinitions>_PRODUCTION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_UNICODE;UNICODE;_PRODUCTION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
-  </ItemDefinitionGroup>
   <PropertyGroup Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '16.0'">v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <GenerateManifest>false</GenerateManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -101,118 +92,70 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
   <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Label="Vcpkg">
-    <VcpkgRepo>https://github.com/microsoft/vcpkg</VcpkgRepo>
-    <!--
-    TODO: Enable version feature flag while vcpkg versions resolution feature is on beta,
-    once it becomes stable remove this from additional options and use msbuild integration
-    -->
-    <VcpkgAdditionalInstallOptions>--feature-flags=versions</VcpkgAdditionalInstallOptions>
-    <VcpkgEnabled>true</VcpkgEnabled>
-    <VcpkgConfiguration Condition="'$(Configuration)'=='Production'">Release</VcpkgConfiguration>
-    <VcpkgEnableManifest>true</VcpkgEnableManifest>
-    <VcpkgManifestInstall>true</VcpkgManifestInstall>
-    <VcpkgInstalledDir>$(ProjectDir)$(BaseIntermediateOutputPath)$(Platform)\</VcpkgInstalledDir>
-    <VcpkgHostTriplet Condition="'$(PROCESSOR_ARCHITECTURE)'=='x86' Or '$(PROCESSOR_ARCHITECTURE)'=='AMD64'">x86-windows</VcpkgHostTriplet>
-    <VcpkgHostTriplet Condition="'$(PROCESSOR_ARCHITECTURE)'=='ARM' Or '$(PROCESSOR_ARCHITECTURE)'=='ARM64'">arm-windows</VcpkgHostTriplet>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
-      <PreprocessorDefinitions>_CONSOLE;WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level4</WarningLevel>
-      <AdditionalOptions>%(AdditionalOptions) /permissive- /bigobj</AdditionalOptions>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <!--Temporarily disable cppwinrt heap enforcement to work around xaml compiler generated std::shared_ptr use -->
+      <AdditionalOptions Condition="'$(CppWinRTHeapEnforcement)'==''">/DWINRT_NO_MAKE_DETECTION %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <PreprocessorDefinitions>_WINRT_DLL;WIN32_LEAN_AND_MEAN;WINRT_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalUsingDirectories>$(WindowsSDK_WindowsMetadata);$(AdditionalUsingDirectories)</AdditionalUsingDirectories>
     </ClCompile>
-    <PreBuildEvent>
-      <Command>powershell -ExecutionPolicy Unrestricted $(ProjectDir)build.ps1 -project_dir $(ProjectDir)</Command>
-    </PreBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_UNICODE;UNICODE;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    </ResourceCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
+      <ModuleDefinitionFile>Notepads.Core.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
-      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release' Or '$(Configuration)'=='Production'">
     <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="appcenter.h" />
-    <ClInclude Include="device.h" />
-    <ClInclude Include="exception.h" />
-    <ClInclude Include="log.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="CoreKey.h">
+      <DependentUpon>CoreKey.idl</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="appcenter.cpp" />
-    <ClCompile Include="elevated.cpp" />
-    <ClCompile Include="extension.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="CoreKey.cpp">
+      <DependentUpon>CoreKey.idl</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="appcenter-sdk-version.txt" />
+    <Midl Include="CoreKey.idl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Notepads.Core.def" />
     <None Include="packages.config" />
-    <None Include="vcpkg.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="AssemblyInfo.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Notepads.Core\Notepads.Core.vcxproj">
-      <Project>{022dc661-4fa2-4264-a869-5a560fb4cc92}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets" Condition="Exists('..\packages\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets')" />
     <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.210312.4\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.210312.4\build\native\Microsoft.Windows.CppWinRT.targets')" />
   </ImportGroup>
-  <Target Name="EnsureVcpkgBuild" BeforeTargets="PrepareForBuild">
-    <Exec Command="git clone $(VcpkgRepo).git ..\packages\vcpkg" Condition="!Exists('..\packages\vcpkg\.git')" ContinueOnError="true" />
-    <Exec Command="git --git-dir=..\packages\vcpkg\.git --work-tree=..\packages\vcpkg pull --ff-only" Condition="Exists('..\packages\vcpkg\.git')" ContinueOnError="true" />
-    <Exec Command="..\packages\vcpkg\bootstrap-vcpkg.bat" Condition="!Exists('..\packages\vcpkg\vcpkg.exe')" ContinueOnError="true" />
-    <PropertyGroup>
-      <ErrorText>This project uses vcpkg that is missing on this computer. Manually download from $(VcpkgRepo) and place the contents in {0}. Or install git and add it to your path, for more information see https://git-scm.com. The missing file is {1}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\vcpkg\vcpkg.exe')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\vcpkg\', '..\packages\vcpkg\vcpkg.exe'))" />
-    <Error Condition="!Exists('..\packages\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\vcpkg\', '..\packages\vcpkg\scripts\buildsystems\msbuild\vcpkg.targets'))" />
-  </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

@@ -130,7 +130,7 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Production|ARM'">
-    <OutputPath>bin\ARM\Release\</OutputPath>
+    <OutputPath>bin\ARM\Production\</OutputPath>
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP;DISABLE_XAML_GENERATED_MAIN</DefineConstants>
     <Optimize>true</Optimize>
     <NoWarn>;2008</NoWarn>
@@ -490,6 +490,10 @@
       <Project>{7aa5e631-b663-420e-a08f-002cd81df855}</Project>
       <Name>Notepads.Controls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Notepads.Core\Notepads.Core.vcxproj">
+      <Project>{022dc661-4fa2-4264-a869-5a560fb4cc92}</Project>
+      <Name>Notepads.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\**\*.resw" />
@@ -503,15 +507,7 @@
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <Target Name="BeforeBuild" Condition="'$(Configuration)' == 'Debug' Or '$(Configuration)' == 'Release'">
-    <Exec Command="powershell -ExecutionPolicy Unrestricted $(ProjectDir)build.ps1 -manifest_file %(AppxManifest.FullPath) -output_path $(ProjectDir)$(BaseIntermediateOutputPath) -config $(Configuration)" ConsoleToMsBuild="true">
-      <Output TaskParameter="ConsoleOutput" PropertyName="GeneratedAppxManifest" />
-    </Exec>
-    <ItemGroup>
-      <AppxManifest Remove="%(AppxManifest.Identity)" />
-      <AppxManifest Include="$(GeneratedAppxManifest)" />
-    </ItemGroup>
-  </Target>
+  <Import Project="UpdateAppxManifest.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
