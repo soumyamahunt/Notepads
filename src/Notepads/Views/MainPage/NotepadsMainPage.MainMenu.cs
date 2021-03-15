@@ -33,9 +33,15 @@
             MenuPrintAllButton.Click += async (sender, args) => await PrintAll(NotepadsCore.GetAllTextEditors());
             MenuSettingsButton.Click += (sender, args) => RootSplitView.IsPaneOpen = true;
 
-            if (!App.IsPrimaryInstance)
+            App.OnInstanceTypeChanged += (sender, args) => CustomizeForInstance(args);
+            CustomizeForInstance(App.IsPrimaryInstance);
+            void CustomizeForInstance(bool isPrimary)
             {
-                MainMenuButton.Foreground = (SolidColorBrush)Application.Current.Resources["SystemControlForegroundAccentBrush"];
+                if (!isPrimary)
+                {
+                    MainMenuButton.Foreground = (SolidColorBrush)Application.Current.Resources["SystemControlForegroundAccentBrush"];
+                    MenuSettingsButton.IsEnabled = false;
+                }
             }
 
             if (App.IsGameBarWidget)
