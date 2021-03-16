@@ -541,6 +541,18 @@
     </GenerateAppxDefaultResourceQualifiers>
   </Target>
   <Import Project="UpdateAppxManifest.targets" />
+  <Target Name="IncludeDesktopActivationComponent" BeforeTargets="BeforeBuild">
+    <PropertyGroup>
+      <Win32Platform>$(Platform)</Win32Platform>
+      <Win32Platform Condition="'$(Win32Platform)' == 'x86'">Win32</Win32Platform>
+    </PropertyGroup>
+    <MSBuild Projects="..\Notepad\Notepad.vcxproj" Properties="Configuration=$(Configuration);Platform=$(Win32Platform)">
+      <Output TaskParameter="TargetOutputs" ItemName="Win32Items" />
+    </MSBuild>
+    <ItemGroup>
+      <Content Include="%(Win32Items.RelativeDir)%(Win32Items.Filename).exe" Link="Resource\%(Win32Items.Filename).exe" />
+    </ItemGroup>
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
