@@ -421,6 +421,18 @@
     <value>System Default</value>
     <comment>AdvancedPage LanguagePreferenceSettings System Default option text.</comment>
   </data>
+  <data name="AboutPage_NotepadsDesktopActivationCopyFile.Content" xml:space="preserve">
+    <value>Copy File</value>
+    <comment>AboutPage Desktop Activation component file copy button text.</comment>
+  </data>
+  <data name="AboutPage_NotepadsDesktopActivationCopyPath.Content" xml:space="preserve">
+    <value>Copy path</value>
+    <comment>AboutPage Desktop Activation component path copy button text.</comment>
+  </data>
+  <data name="AboutPage_NotepadsDesktopActivationDescription.Text" xml:space="preserve">
+    <value>Use desktop component to broker file activation with Notepads</value>
+    <comment>AboutPage Desktop Activation description text.</comment>
+  </data>
   <data name="AdvancedPage_AppLifecyclePreferenceSettings_ExitingLastTabClosesWindowToggleSwitch.OffContent" xml:space="preserve">
     <value>Exiting last tab closes window</value>
     <comment>AdvancedPage AppLifecyclePreferenceSettings ExitingLastTabClosesWindowToggleSwitch Off display text.</comment>
