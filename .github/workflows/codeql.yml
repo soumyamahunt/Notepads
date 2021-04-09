@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     env:
       SOLUTION_NAME: src\Notepads.sln
-      CONFIGURATION: Debug
+      CONFIGURATION: Production
       DEFAULT_DIR: ${{ github.workspace }}
     steps:
       - name: Setup MSBuild
