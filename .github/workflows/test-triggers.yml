@@ -29,6 +29,8 @@ on:
   status:
   watch:
   repository_dispatch:
+  workflow_run:
+    workflows: ["**Code scanning**"]
   schedule:
     - cron: '0 8 * * *'
 

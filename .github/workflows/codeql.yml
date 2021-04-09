@@ -46,6 +46,12 @@ jobs:
           msbuild $env:SOLUTION_NAME /t:Restore
           nuget restore $env:SOLUTION_NAME
 
+      - name: Initialize CodeQL
+        id: init_codeql
+        uses: github/codeql-action/init@v1
+        with:
+          queries: security-and-quality
+
       - name: Build and generate bundles
         id: build_app
         shell: pwsh
