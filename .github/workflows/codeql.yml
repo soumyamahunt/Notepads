@@ -1,0 +1,72 @@
+name: Codeql scanning
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  scan:
+    runs-on: windows-latest
+    env:
+      SOLUTION_NAME: src\Notepads.sln
+      CONFIGURATION: Debug
+      DEFAULT_DIR: ${{ github.workspace }}
+    steps:
+      - name: Setup MSBuild
+        id: setup_msbuild
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Setup NuGet
+        id: setup-nuget
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Checkout repository
+        id: checkout_repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 50
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Due to the insufficient memory allocated by default, CodeQL sometimes requires more to be manually allocated
+      - name: Configure Pagefile
+        id: config_pagefile
+        uses: al-cheb/configure-pagefile-action@v1.2
+        with:
+            minimum-size: 8GB
+            maximum-size: 10GB
+            disk-root: "D:"
+
+      - name: Restore the application
+        id: restore_application
+        shell: pwsh
+        run: |
+          msbuild $env:SOLUTION_NAME /t:Restore
+          nuget restore $env:SOLUTION_NAME
+
+      - name: Build and generate bundles
+        id: build_app
+        shell: pwsh
+        run: |
+          msbuild $env:SOLUTION_NAME `
+          /p:Platform=$env:PLATFORM `
+          /p:Configuration=$env:CONFIGURATION `
+          /p:UapAppxPackageBuildMode=$env:UAP_APPX_PACKAGE_BUILD_MODE `
+          /p:AppxBundle=$env:APPX_BUNDLE `
+          /p:AppxPackageSigningEnabled=$env:APPX_PACKAGE_SIGNING_ENABLED `
+          /p:AppxBundlePlatforms=$env:APPX_BUNDLE_PLATFORMS `
+          /p:AppxPackageDir=$env:ARTIFACTS_DIR `
+        env:
+          PLATFORM: x64
+          UAP_APPX_PACKAGE_BUILD_MODE: StoreUpload
+          APPX_BUNDLE: Always
+          APPX_PACKAGE_SIGNING_ENABLED: ${{ False }}
+          APPX_BUNDLE_PLATFORMS: x64
+          ARTIFACTS_DIR: ${{ github.workspace }}\Artifacts
+
+      - name: Perform CodeQL Analysis
+        id: analyze_codeql
+        uses: github/codeql-action/analyze@v1
+        continue-on-error: true

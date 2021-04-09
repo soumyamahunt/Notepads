@@ -1,0 +1,62 @@
+name: Test triggers
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  check_run:
+  check_suite:
+  create:
+  delete:
+  deployment:
+  deployment_status:
+  fork:
+  gollum:
+  issue_comment:
+  issues:
+  label:
+  milestone:
+  page_build:
+  project:
+  project_card:
+  project_column:
+  public:
+  pull_request_review:
+  pull_request_review_comment:
+  pull_request_target:
+  registry_package:
+  release:
+  status:
+  watch:
+  repository_dispatch:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$env:GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJSON(job) }}
+        run: echo "$env:JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJSON(steps) }}
+        run: echo "$env:STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJSON(runner) }}
+        run: echo "$env:RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+        run: echo "$env:STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+        run: echo "env:$MATRIX_CONTEXT"
